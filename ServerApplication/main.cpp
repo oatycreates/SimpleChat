@@ -33,7 +33,7 @@ void HandleNetworkMessages(RakNet::RakPeerInterface* a_pPeerInterface)
 				//Send chat dump.
 				if (history.size() > 0)
 				{
-					bs.Write((RakNet::MessageID)GameMessages::ID_CHAT_DUMP);
+					bs.Write((RakNet::MessageID)EGameMessages::ID_CHAT_DUMP);
 					int i;
 					if ((int)history.size() - 22 > 0) 
 					{
@@ -44,7 +44,7 @@ void HandleNetworkMessages(RakNet::RakPeerInterface* a_pPeerInterface)
 						i = 0; 
 					}
 					bs.Write((unsigned int)history.size() - i);
-					for (i; i < history.size(); ++i)
+					for (i; i < (int) history.size(); ++i)
 					{
 						bs.Write(history[i].c_str());
 					}
@@ -70,7 +70,7 @@ void HandleNetworkMessages(RakNet::RakPeerInterface* a_pPeerInterface)
 				if ((history.size() > 0 && (std::string(packet->systemAddress.ToString()) + std::string(": ") + std::string(str.C_String())).c_str() != history[history.size() - 1]) || history.size() == 0)
 				{
 					//...and send it out to everyone but the sender
-					bs.Write((RakNet::MessageID)GameMessages::ID_SERVER_CHAT_MESSAGE);
+					bs.Write((RakNet::MessageID)EGameMessages::ID_SERVER_CHAT_MESSAGE);
 					bs.Write((std::string(packet->systemAddress.ToString()) + std::string(": ") + std::string(str.C_String())).c_str());
 
 					std::cout << std::string(packet->systemAddress.ToString()) + std::string(": ") + std::string(str.C_String()) << std::endl;
@@ -95,7 +95,7 @@ void SendClientPing(RakNet::RakPeerInterface* pPeerInterface)
 	while (true)
 	{
 		RakNet::BitStream bs;
-		bs.Write((RakNet::MessageID)GameMessages::ID_SERVER_TEXT_MESSAGE);
+		bs.Write((RakNet::MessageID)EGameMessages::ID_SERVER_TEXT_MESSAGE);
 		bs.Write("Ping!");
 
 		pPeerInterface->Send(&bs, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
