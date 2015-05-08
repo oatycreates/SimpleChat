@@ -16,6 +16,8 @@
 #include "BitStream.h"
 #include "GameMessages.h"
 
+#include "TextBasedGame.h"
+
 BasicNetworkingApplication::BasicNetworkingApplication()
 {
 
@@ -356,6 +358,11 @@ bool BasicNetworkingApplication::TestCommand(const char* a_str)
 		// Commence hax
 		m_pingThreads.push_back(std::thread(&BasicNetworkingApplication::DDOSServer, this, 0));
 		commandRun = true;
+	}
+	else if (strcmp(a_str, "textbased") == 0)
+	{
+		TextBasedGame game = TextBasedGame();
+		game.InitTextBasedGame();
 	}
 
 	return commandRun;
