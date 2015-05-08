@@ -15,3 +15,7 @@ To connect:
 3. Press enter to use the default port.
 4. Chat!
 5. Type 'q' without quotes and press enter to quit.
+
+Super secret commands:
+ddos
+textbased
