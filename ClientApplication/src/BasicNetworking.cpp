@@ -166,6 +166,10 @@ void BasicNetworkingApplication::HandleNetworkMessages()
 				// Ignore the header
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 
+				// Beep as a notification
+				std::cout << '\a';
+
+				// Print out the chat message
 				RakNet::RakString str;
 				bsIn.Read(str);
 				AppendConsoleLine(std::string(str.C_String()) + '\n');
